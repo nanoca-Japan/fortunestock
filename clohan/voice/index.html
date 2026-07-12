@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>オコエカケ — 黑斑藥局 / ForTUNE STOCK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=BIZ+UDMincho:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#030302;--bg2:#080807;--bg3:#0e0e0c;
+--w0:#ece8da;--w1:#b8b4a4;--w2:#706c5c;--w3:#3a3830;--w4:#1e1c16;
+--bdr:#1a1816;--bdr2:#282420;--bdr3:#3a3630;
+--serif:"BIZ UDMincho","Noto Serif JP",serif;
+--mono:"Share Tech Mono",monospace;
+}
+html{background:var(--bg);color:var(--w0);font-family:var(--mono);min-height:100%;-webkit-font-smoothing:antialiased;}
+body{background:var(--bg);min-height:100vh;overflow-x:hidden;}
+#crt{position:fixed;inset:0;pointer-events:none;z-index:9000;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(0,0,0,0.2) 3px,rgba(0,0,0,0.2) 4px);}
+#vignette{position:fixed;inset:0;pointer-events:none;z-index:8997;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.6) 100%);}
+#fortune{position:fixed;bottom:10px;right:14px;z-index:500;font-size:0.4rem;letter-spacing:0.14em;color:var(--w4);pointer-events:none;font-family:var(--mono);}
+#build{position:fixed;bottom:10px;left:14px;z-index:500;font-size:0.4rem;letter-spacing:0.1em;color:var(--w4);pointer-events:none;font-family:var(--mono);}
+@keyframes bk{0%,88%,92%,96%{opacity:1}89%,93%,97%{opacity:0}}
+.top-bar{width:100%;border-bottom:1px solid var(--bdr2);padding:9px 18px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);}
+.top-bar-l{font-size:0.45rem;letter-spacing:0.16em;color:var(--w3)}
+.top-bar-r{font-size:0.45rem;letter-spacing:0.1em;color:var(--w3);animation:bk 3.5s steps(1) infinite}
+.main{min-height:calc(100vh - 40px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1.2rem;}
+.card{width:100%;max-width:440px;border:1px solid var(--bdr2);background:var(--bg2);}
+.card-strip{background:var(--bdr);border-bottom:1px solid var(--bdr2);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;}
+.card-strip-l{font-size:0.44rem;letter-spacing:0.2em;color:var(--w3)}
+.card-strip-r{font-size:0.42rem;letter-spacing:0.12em;color:var(--w2);animation:bk 2.2s steps(1) infinite}
+.symbol-row{text-align:center;padding:1.8rem 1.5rem 0.4rem;}
+.symbol-text{font-family:var(--mono);font-size:1.3rem;letter-spacing:0.2em;color:var(--w3);display:block;opacity:0.4;}
+.menu-title{font-family:var(--serif);font-weight:700;font-size:clamp(2.2rem,8.5vw,3.2rem);letter-spacing:0.28em;color:var(--w0);line-height:1;text-align:center;text-shadow:0 0 40px rgba(232,228,218,0.04);padding:0 1rem;}
+.menu-sub{font-family:var(--mono);font-size:0.44rem;letter-spacing:0.16em;color:var(--w3);text-align:center;margin-top:0.5rem;}
+.rule{display:flex;align-items:center;gap:10px;padding:1.2rem 1.5rem 0;}
+.rule-line{flex:1;height:1px;background:var(--bdr2)}
+.rule-sym{font-size:0.42rem;letter-spacing:0.18em;color:var(--bdr3);white-space:nowrap;}
+.desc{font-family:var(--serif);font-weight:400;font-size:0.7rem;letter-spacing:0.08em;color:var(--w1);line-height:2.1;text-align:center;padding:1rem 1.4rem 0;overflow-wrap:break-word;word-break:keep-all;}
+.desc small{display:block;font-family:var(--mono);font-size:0.42rem;letter-spacing:0.14em;color:var(--w3);margin-top:0.35rem;}
+.spec{margin:1.4rem 1.4rem 0;border:1px solid var(--bdr2);}
+.spec-row{display:flex;border-bottom:1px solid var(--bdr2);}
+.spec-row:last-child{border-bottom:none}
+.spec-k{width:38%;padding:0.7rem 0.9rem;font-size:0.44rem;letter-spacing:0.15em;color:var(--w3);border-right:1px solid var(--bdr2);display:flex;align-items:center;}
+.spec-v{flex:1;padding:0.7rem 0.9rem;font-family:var(--serif);font-size:0.68rem;letter-spacing:0.08em;color:var(--w0);line-height:1.7;}
+.spec-v .num{font-family:var(--mono);letter-spacing:0.12em;}
+.flow{margin:1.4rem 1.4rem 0;}
+.flow-head{font-size:0.42rem;letter-spacing:0.22em;color:var(--w3);margin-bottom:0.6rem;}
+.flow-item{display:flex;align-items:flex-start;gap:0.8rem;padding:0.55rem 0;border-bottom:1px solid var(--bdr);}
+.flow-item:last-child{border-bottom:none}
+.flow-mark{font-size:0.44rem;color:var(--w3);min-width:2.4em;padding-top:0.18em;}
+.flow-txt{font-family:var(--serif);font-size:0.64rem;letter-spacing:0.06em;color:var(--w1);line-height:1.9;}
+.note{margin:1.4rem 1.4rem 0;border:1px solid var(--bdr2);background:var(--bg3);padding:0.9rem 1rem;}
+.note p{font-family:var(--serif);font-size:0.58rem;letter-spacing:0.06em;color:var(--w2);line-height:2;}
+.btn-wrap{padding:1.6rem 1.5rem}
+.btn-start{width:100%;background:var(--bg);border:1px solid var(--bdr3);color:var(--w1);font-family:var(--mono);font-size:0.65rem;letter-spacing:0.25em;padding:1rem;cursor:pointer;transition:background 0.2s,border-color 0.2s,color 0.2s;display:block;text-align:center;text-decoration:none;}
+.btn-start:hover{background:var(--bg3);border-color:var(--w2);color:var(--w0);}
+.btn-back{display:block;text-align:center;font-size:0.46rem;letter-spacing:0.2em;color:var(--w3);text-decoration:none;padding-bottom:1.4rem;}
+.btn-back:hover{color:var(--w1)}
+.card-foot{border-top:1px solid var(--bdr2);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;background:var(--bdr);}
+.card-foot-l{font-size:0.42rem;letter-spacing:0.1em;color:var(--w4)}
+.card-foot-r{font-size:0.42rem;letter-spacing:0.1em;color:var(--w4)}
+@media(max-width:400px){.menu-title{font-size:2rem;letter-spacing:0.2em}}
+</style>
+</head>
+<body>
+<div id="crt"></div><div id="vignette"></div>
+<div id="build">FORTUNE-STOCK 2026.07-f1</div>
+<div id="fortune">Powered by ForTUNE STOCK</div>
+
+<div class="top-bar">
+  <span class="top-bar-l">CLOHAN DISPENSARY ●/■ MENU-02</span>
+  <span class="top-bar-r" id="sysTime">● 00:00:00</span>
+</div>
+
+<div class="main">
+  <div class="card">
+    <div class="card-strip"><span class="card-strip-l">RX-VOICE-968</span><span class="card-strip-r">▮ OPEN</span></div>
+
+    <div class="symbol-row"><span class="symbol-text">●/■</span></div>
+
+    <div class="menu-title">オコエカケ</div>
+    <div class="menu-sub">VOICE LETTER PRESCRIPTION</div>
+
+    <div class="rule"><div class="rule-line"></div><div class="rule-sym">声の投函 / VOICE POSTING</div><div class="rule-line"></div></div>
+
+    <div class="desc">
+      あなたの声を、藥局に投函してください。<br>
+      CLOHANが聴き、声の手紙で返送します。
+      <small>YOUR VOICE IN ●/■ CLOHAN'S VOICE OUT</small>
+    </div>
+
+    <div class="spec">
+      <div class="spec-row"><div class="spec-k">処方料</div><div class="spec-v"><span class="num">¥968</span></div></div>
+      <div class="spec-row"><div class="spec-k">投函できる声</div><div class="spec-v"><span class="num">96.8</span>秒 まで</div></div>
+      <div class="spec-row"><div class="spec-k">返送</div><div class="spec-v">CLOHANの声の手紙（受付から7日以内を目安）</div></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head">手順 / PROCEDURE</div>
+      <div class="flow-item"><span class="flow-mark">●</span><span class="flow-txt">下のボタンから処方料をお支払いください</span></div>
+      <div class="flow-item"><span class="flow-mark">●●</span><span class="flow-txt">受付コードが発行され、投函口が開きます</span></div>
+      <div class="flow-item"><span class="flow-mark">●●●</span><span class="flow-txt">96.8秒までの声を録音し、投函口から送ってください</span></div>
+      <div class="flow-item"><span class="flow-mark">●/■</span><span class="flow-txt">CLOHANの声の手紙が届きます</span></div>
+    </div>
+
+    <div class="note">
+      <p>
+        ・96.8秒を超えた部分の声は、調剤の対象外となります。<br>
+        ・このメニューでは、返送のために送信元のメールアドレスをお預かりします。返送以外の目的には使用しません。<br>
+        ・投函された声は、返送の調剤のためだけに聴かれます。
+      </p>
+    </div>
+
+    <div class="btn-wrap">
+      <a class="btn-start" href="https://buy.stripe.com/fZudRb4Z064Mcps8wHfw403">処方料を支払い、投函口をひらく</a>
+    </div>
+    <a class="btn-back" href="../">← 藥局に戻る</a>
+
+    <div class="card-foot"><span class="card-foot-l">黑斑藥局 ●/■ CLOHAN</span><span class="card-foot-r">MENU-02 / VOICE</span></div>
+  </div>
+</div>
+
+<script>
+// quiet=1 で演出をすべて停止（品質規律3）
+if(new URLSearchParams(location.search).get('quiet')==='1'){
+  document.getElementById('crt').style.display='none';
+  document.getElementById('vignette').style.display='none';
+}
+// 時計
+function tick(){
+  var d=new Date();
+  var p=function(n){return String(n).padStart(2,'0')};
+  document.getElementById('sysTime').textContent='● '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());
+}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>

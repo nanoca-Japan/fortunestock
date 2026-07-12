@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>受付完了 — オコエカケ / 黑斑藥局</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=BIZ+UDMincho:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#030302;--bg2:#080807;--bg3:#0e0e0c;
+--w0:#ece8da;--w1:#b8b4a4;--w2:#706c5c;--w3:#3a3830;--w4:#1e1c16;
+--bdr:#1a1816;--bdr2:#282420;--bdr3:#3a3630;
+--serif:"BIZ UDMincho","Noto Serif JP",serif;
+--mono:"Share Tech Mono",monospace;
+}
+html{background:var(--bg);color:var(--w0);font-family:var(--mono);min-height:100%;-webkit-font-smoothing:antialiased;}
+body{background:var(--bg);min-height:100vh;overflow-x:hidden;}
+#crt{position:fixed;inset:0;pointer-events:none;z-index:9000;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(0,0,0,0.2) 3px,rgba(0,0,0,0.2) 4px);}
+#vignette{position:fixed;inset:0;pointer-events:none;z-index:8997;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.6) 100%);}
+#fortune{position:fixed;bottom:10px;right:14px;z-index:500;font-size:0.4rem;letter-spacing:0.14em;color:var(--w4);pointer-events:none;font-family:var(--mono);}
+#build{position:fixed;bottom:10px;left:14px;z-index:500;font-size:0.4rem;letter-spacing:0.1em;color:var(--w4);pointer-events:none;font-family:var(--mono);}
+@keyframes bk{0%,88%,92%,96%{opacity:1}89%,93%,97%{opacity:0}}
+.top-bar{width:100%;border-bottom:1px solid var(--bdr2);padding:9px 18px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);}
+.top-bar-l{font-size:0.45rem;letter-spacing:0.16em;color:var(--w3)}
+.top-bar-r{font-size:0.45rem;letter-spacing:0.1em;color:var(--w3);animation:bk 3.5s steps(1) infinite}
+.main{min-height:calc(100vh - 40px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1.2rem;}
+.card{width:100%;max-width:440px;border:1px solid var(--bdr2);background:var(--bg2);}
+.card-strip{background:var(--bdr);border-bottom:1px solid var(--bdr2);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;}
+.card-strip-l{font-size:0.44rem;letter-spacing:0.2em;color:var(--w3)}
+.card-strip-r{font-size:0.42rem;letter-spacing:0.12em;color:var(--w2);animation:bk 2.2s steps(1) infinite}
+.head{text-align:center;padding:1.8rem 1.5rem 0;}
+.head-sym{font-family:var(--mono);font-size:1.1rem;letter-spacing:0.2em;color:var(--w3);opacity:0.4;display:block;margin-bottom:0.8rem;}
+.head-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,6vw,2rem);letter-spacing:0.2em;color:var(--w0);}
+.head-sub{font-family:var(--mono);font-size:0.44rem;letter-spacing:0.16em;color:var(--w3);margin-top:0.5rem;}
+.code-box{margin:1.6rem 1.4rem 0;border:1px solid var(--bdr3);background:var(--bg3);padding:1.1rem 1rem;text-align:center;}
+.code-label{font-size:0.42rem;letter-spacing:0.25em;color:var(--w3);margin-bottom:0.5rem;}
+.code-val{font-family:var(--mono);font-size:1.3rem;letter-spacing:0.3em;color:var(--w0);word-break:break-all;}
+.desc{font-family:var(--serif);font-weight:400;font-size:0.68rem;letter-spacing:0.07em;color:var(--w1);line-height:2.1;text-align:center;padding:1.4rem 1.4rem 0;word-break:keep-all;}
+.steps{margin:1.4rem 1.4rem 0;}
+.step{display:flex;align-items:flex-start;gap:0.8rem;padding:0.55rem 0;border-bottom:1px solid var(--bdr);}
+.step:last-child{border-bottom:none}
+.step-mark{font-size:0.44rem;color:var(--w3);min-width:2.4em;padding-top:0.18em;}
+.step-txt{font-family:var(--serif);font-size:0.63rem;letter-spacing:0.05em;color:var(--w1);line-height:1.9;}
+.step-txt .em{color:var(--w0)}
+.note{margin:1.4rem 1.4rem 0;border:1px solid var(--bdr2);background:var(--bg3);padding:0.9rem 1rem;}
+.note p{font-family:var(--serif);font-size:0.56rem;letter-spacing:0.05em;color:var(--w2);line-height:2;}
+.btn-wrap{padding:1.6rem 1.5rem 1rem}
+.btn-post{width:100%;background:var(--bg);border:1px solid var(--bdr3);color:var(--w1);font-family:var(--mono);font-size:0.65rem;letter-spacing:0.25em;padding:1rem;cursor:pointer;transition:background 0.2s,border-color 0.2s,color 0.2s;display:block;text-align:center;text-decoration:none;}
+.btn-post:hover{background:var(--bg3);border-color:var(--w2);color:var(--w0);}
+.mail-fallback{text-align:center;padding:0 1.5rem 1.4rem;font-size:0.46rem;letter-spacing:0.08em;color:var(--w3);line-height:2;}
+.mail-fallback .addr{color:var(--w2);user-select:all;}
+.card-foot{border-top:1px solid var(--bdr2);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;background:var(--bdr);}
+.card-foot-l{font-size:0.42rem;letter-spacing:0.1em;color:var(--w4)}
+.card-foot-r{font-size:0.42rem;letter-spacing:0.1em;color:var(--w4)}
+</style>
+</head>
+<body>
+<div id="crt"></div><div id="vignette"></div>
+<div id="build">FORTUNE-STOCK 2026.07-f1</div>
+<div id="fortune">Powered by ForTUNE STOCK</div>
+
+<div class="top-bar">
+  <span class="top-bar-l">CLOHAN DISPENSARY ●/■ MENU-02</span>
+  <span class="top-bar-r" id="sysTime">● 00:00:00</span>
+</div>
+
+<div class="main">
+  <div class="card">
+    <div class="card-strip"><span class="card-strip-l">RX-VOICE-968</span><span class="card-strip-r">▮ ACCEPTED</span></div>
+
+    <div class="head">
+      <span class="head-sym">●/■</span>
+      <div class="head-title">受付が完了しました</div>
+      <div class="head-sub">OKOEKAKE ●/■ PRESCRIPTION ACCEPTED</div>
+    </div>
+
+    <div class="code-box">
+      <div class="code-label">受付コード / RECEPTION CODE</div>
+      <div class="code-val" id="codeVal">--------</div>
+    </div>
+
+    <div class="desc">
+      投函口がひらきました。<br>
+      あなたの声を、お聞かせください。
+    </div>
+
+    <div class="steps">
+      <div class="step"><span class="step-mark">●</span><span class="step-txt">スマートフォンの<span class="em">ボイスメモ</span>などで、<span class="em">96.8秒まで</span>の声を録音してください</span></div>
+      <div class="step"><span class="step-mark">●●</span><span class="step-txt">下の<span class="em">「投函口をひらく」</span>を押すと、宛先と受付コードが記入済みの投函便がひらきます</span></div>
+      <div class="step"><span class="step-mark">●●●</span><span class="step-txt">録音した声のファイルを<span class="em">添付</span>して、そのまま送ってください</span></div>
+      <div class="step"><span class="step-mark">●/■</span><span class="step-txt">受付から<span class="em">7日以内</span>を目安に、CLOHANの声の手紙を同じ宛先へ返送します</span></div>
+    </div>
+
+    <div class="note">
+      <p>
+        ・96.8秒を超えた部分の声は、調剤の対象外となります。<br>
+        ・お預かりしたメールアドレスは、返送以外の目的には使用しません。<br>
+        ・受付コードは返送まで大切に保管してください。
+      </p>
+    </div>
+
+    <div class="btn-wrap">
+      <a class="btn-post" id="btnPost" href="#">投函口をひらく</a>
+    </div>
+    <div class="mail-fallback">
+      ボタンからメールがひらかない場合は、<br>
+      <span class="addr">clohan.heiban@gmail.com</span> 宛に<br>
+      件名へ受付コードを記入のうえ、声のファイルを添付して送ってください。
+    </div>
+
+    <div class="card-foot"><span class="card-foot-l">黑斑藥局 ●/■ CLOHAN</span><span class="card-foot-r">MENU-02 / VOICE</span></div>
+  </div>
+</div>
+
+<script>
+// quiet=1 で演出をすべて停止（品質規律3）
+if(new URLSearchParams(location.search).get('quiet')==='1'){
+  document.getElementById('crt').style.display='none';
+  document.getElementById('vignette').style.display='none';
+}
+// 時計
+function tick(){
+  var d=new Date();
+  var p=function(n){return String(n).padStart(2,'0')};
+  document.getElementById('sysTime').textContent='● '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());
+}
+tick();setInterval(tick,1000);
+
+// 受付コード：Stripeのsession_idの末尾8文字を大文字で表示
+// （管理側はStripeダッシュボードの支払い詳細のセッションIDと突き合わせて確認できる）
+var params=new URLSearchParams(location.search);
+var sid=params.get('session_id')||'';
+var code=sid?sid.slice(-8).toUpperCase():'';
+var codeEl=document.getElementById('codeVal');
+var btn=document.getElementById('btnPost');
+var MAIL='clohan.heiban@gmail.com';
+
+if(code){
+  codeEl.textContent=code;
+  var subject='【オコエカケ】声の投函 / 受付コード:'+code;
+  var body='黑斑藥局 オコエカケ 投函便\n'
+    +'受付コード: '+code+'\n'
+    +'照合ID: '+sid+'\n'
+    +'------------------------------\n'
+    +'このメールに、96.8秒までの声のファイルを添付して送信してください。\n'
+    +'（メッセージの追記は自由です）\n';
+  btn.href='mailto:'+MAIL
+    +'?subject='+encodeURIComponent(subject)
+    +'&body='+encodeURIComponent(body);
+}else{
+  // session_idが無い（直接アクセス等）場合の予備動線
+  codeEl.textContent='未発行';
+  document.querySelector('.desc').innerHTML='受付コードが確認できませんでした。<br>お支払い時の決済メール（Stripeの領収メール）に記載の<br>領収書番号を件名に記入して投函してください。';
+  var subject2='【オコエカケ】声の投函 / 領収書番号:（ここに記入）';
+  var body2='黑斑藥局 オコエカケ 投函便\n'
+    +'領収書番号:（Stripeの領収メールに記載の番号を記入してください）\n'
+    +'------------------------------\n'
+    +'このメールに、96.8秒までの声のファイルを添付して送信してください。\n';
+  btn.href='mailto:'+MAIL
+    +'?subject='+encodeURIComponent(subject2)
+    +'&body='+encodeURIComponent(body2);
+}
+</script>
+</body>
+</html>
