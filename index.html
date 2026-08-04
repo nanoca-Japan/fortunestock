@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>forTUNE STOCK ── あなたの"心の時間"に、いまの一曲を。</title>
+<meta name="description" content="forTUNE STOCK は、ファンが自分の心の時間に合う一曲と出会い、その記録が積み重なっていく、歌い手・VTuberのためのファン体験の型です。">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--night:#12141E;--night2:#1A1D2C;--gold:#C9A85A;--goldl:#E2C98F;--paper:#F3EFE8;--dim:#8A90A6;--suou:#9E4A5E;--card:#1E2233;--line:#2A2F44}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:300;background:linear-gradient(180deg,var(--night),var(--night2));color:#D8DCE8;line-height:2;font-size:14.5px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+/* hero */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.en{font-family:"Space Grotesk",sans-serif;font-size:12px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase}
+h1{font-family:"Zen Old Mincho",serif;font-weight:700;color:var(--paper);font-size:clamp(30px,7vw,52px);letter-spacing:.06em;margin:18px 0 10px;line-height:1.5}
+.tag{font-family:"Zen Old Mincho",serif;color:var(--goldl);font-size:clamp(15px,3.4vw,20px);letter-spacing:.08em}
+.sub{color:var(--dim);font-size:13px;margin-top:26px}
+/* clock */
+.clock{position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:min(46vw,340px);height:min(46vw,340px);opacity:.5;pointer-events:none}
+.clock .face{position:absolute;inset:0}
+.clock .dot{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.hand{position:absolute;left:50%;bottom:50%;transform-origin:bottom center;background:var(--goldl);border-radius:4px}
+.h1x{width:4px;height:26%;animation:rot 240s linear infinite}
+.h2x{width:2.5px;height:38%;animation:rot 60s linear infinite}
+.pin{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:var(--suou);transform:translate(-50%,-50%)}
+@keyframes rot{from{transform:translateX(-50%) rotate(0)}to{transform:translateX(-50%) rotate(360deg)}}
+/* sections */
+section{padding:70px 0 8px}
+h2{font-family:"Zen Old Mincho",serif;font-weight:700;color:var(--paper);font-size:21px;letter-spacing:.06em;margin-bottom:16px}
+h2 .n{font-family:"Space Grotesk",sans-serif;color:var(--gold);font-size:12px;letter-spacing:.3em;display:block;margin-bottom:8px}
+p{margin:9px 0;color:#C3C8D8}
+b{color:var(--paper);font-weight:500}
+em{font-style:normal;color:var(--goldl)}
+.rule{width:52px;height:2px;background:var(--gold);margin:20px 0 24px;position:relative}
+.rule::after{content:"";position:absolute;right:-14px;top:-3px;width:8px;height:8px;background:var(--suou);border-radius:2px}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center}
+.step .k{font-family:"Space Grotesk",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--gold)}
+.step .t{font-family:"Zen Old Mincho",serif;color:var(--paper);font-size:16px;margin:8px 0 6px}
+.step .d{font-size:11.5px;color:var(--dim);line-height:1.7}
+/* artists */
+.artist{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:12px 0;text-decoration:none;transition:border-color .25s}
+.artist:hover{border-color:var(--gold)}
+.artist .no{font-family:"Space Grotesk",sans-serif;color:var(--gold);font-size:13px;letter-spacing:.14em;flex:0 0 auto}
+.artist .nm{font-family:"Zen Old Mincho",serif;color:var(--paper);font-size:19px;letter-spacing:.06em}
+.artist .de{font-size:12px;color:var(--dim);margin-top:2px}
+.artist .go{margin-left:auto;color:var(--gold);font-size:18px;flex:0 0 auto}
+.artist.empty{border-style:dashed;opacity:.75}
+.artist.empty .nm{color:var(--dim);font-size:15px}
+/* b2b */
+.offer{background:var(--card);border:1px solid var(--gold);border-radius:16px;padding:26px 28px;margin:20px 0}
+.price{font-family:"Zen Old Mincho",serif;color:var(--goldl);font-size:24px}
+.price small{font-size:13px;color:var(--dim)}
+.btn{display:inline-block;background:var(--gold);color:var(--night);font-weight:500;border-radius:30px;padding:12px 34px;text-decoration:none;font-size:14px;margin:14px 8px 4px 0;letter-spacing:.06em}
+.btn.ghost{background:none;border:1px solid var(--gold);color:var(--goldl)}
+ul{list-style:none;margin:8px 0}
+li{padding-left:20px;position:relative;margin:7px 0;font-size:13.5px;color:#C3C8D8}
+li::before{content:"◆";color:var(--gold);position:absolute;left:0;font-size:8px;top:8px}
+.note{font-size:11.5px;color:var(--dim)}
+footer{margin-top:80px;border-top:1px solid var(--line);padding:26px 0 40px;text-align:center;color:var(--dim);font-size:11.5px}
+footer .en{font-size:10px;letter-spacing:.3em}
+a{color:var(--goldl)}
+@media(max-width:640px){.flow{grid-template-columns:1fr 1fr}.clock{opacity:.22}}
+</style>
+</head>
+<body>
+<script>
+/* 旧URL互換：黒斑藥曲の共有リンク（クエリ付き）で来た方を、No.000へそのまま送り届ける */
+(function(){var q=location.search;if(q&&q.length>1){location.replace('000/'+q);}})();
+</script>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="clock" id="clock"><div class="face" id="face"></div>
+    <div class="hand h1x"></div><div class="hand h2x"></div><div class="pin"></div>
+  </div>
+  <div class="en">FORTUNE STOCK</div>
+  <h1>あなたの"心の時間"に、<br>いまの一曲を。</h1>
+  <div class="tag">世界の時間と、心の時間は、すこしずれている。</div>
+  <div class="sub">forTUNE STOCK ── 歌い手・VTuberのための、ファン体験の型。<br>presented by nanoca inc.</div>
+</div>
+
+<section id="about">
+  <h2><span class="n">CONCEPT</span>占いには、しませんでした</h2>
+  <div class="rule"></div>
+  <p>疲れて帰った夜と、うれしくて眠れない夜では、聴きたい一曲はちがう。forTUNE STOCK は、あなたの<b>いまの状態</b>から、<em>一定の規則で</em>その時間に合う一曲を選びます。同じ状態からは、いつも同じ一曲。でもあなたの毎日は二度と同じではないから、出会いの記録は毎日ちがう景色になる。</p>
+  <p>ランダムでも、占いでもありません。<b>音楽が、その場かぎりで消えないための仕組み</b>です。聴いた記録は時間軸に積み重なり、あなたと、あなたの推しの間に「通った時間」が残ります。</p>
+</section>
+
+<section id="flow">
+  <h2><span class="n">EXPERIENCE</span>体験のながれ</h2>
+  <div class="rule"></div>
+  <div class="flow">
+    <div class="step"><div class="k">01</div><div class="t">たずねる</div><div class="d">いまのあなたの状態を、そっと聞かせてください</div></div>
+    <div class="step"><div class="k">02</div><div class="t">はかる</div><div class="d">心の時間を、一定の規則で読み取ります</div></div>
+    <div class="step"><div class="k">03</div><div class="t">とどく</div><div class="d">その時間に合う一曲が、あなたに処方されます</div></div>
+    <div class="step"><div class="k">04</div><div class="t">つもる</div><div class="d">出会いの記録が、時間軸に残っていきます</div></div>
+  </div>
+</section>
+
+<section id="artists">
+  <h2><span class="n">ARTISTS</span>導入アーティスト</h2>
+  <div class="rule"></div>
+  <p>forTUNE STOCK は、アーティストごとにひらかれる「その人だけの藥局」です。</p>
+
+  <a class="artist" href="000/">
+    <span class="no">No.000</span>
+    <span><span class="nm">黒斑藥曲</span><div class="de">最初の導入アーティスト。β運用から本リリースまでを共に歩んだ、第0号の藥局。</div></span>
+    <span class="go">→</span>
+  </a>
+  <div class="artist empty">
+    <span class="no">No.001</span>
+    <span><span class="nm">── あなたの藥局が、ここにひらきます</span><div class="de">リリース記念・先着2組（下記）</div></span>
+  </div>
+  <div class="artist empty">
+    <span class="no">No.002</span>
+    <span><span class="nm">── あなたの藥局が、ここにひらきます</span></span>
+  </div>
+</section>
+
+<section id="join">
+  <h2><span class="n">FOR ARTISTS</span>歌い手・VTuberの方へ</h2>
+  <div class="rule"></div>
+  <p>ライブとライブの間、あなたのファンは何をしていますか。forTUNE STOCK は、ファンの日常に<b>あなたの音楽の居場所</b>をつくります。β運用では、告知を行う前の段階で有償のお申し込みが発生しました──「お金を払ってでも欲しい体験」であることは、実証済みです。</p>
+  <div class="offer">
+    <div class="price">導入 198,000円 <small>（リリース記念・先着2組・事例ご協力のお願いつき／通常 298,000円）</small></div>
+    <ul>
+      <li>初期設定一式・あなたの活動への導入・使い方レクチャー60分（オンライン）</li>
+      <li>納品後30日間のメールサポート（調整2回まで）／任意の月次サポート 22,000円</li>
+      <li>選曲はあなたの楽曲・あなたの世界観で設計。ファンデータはあなたのものです</li>
+    </ul>
+    <a class="btn" href="FORM_URL_HERE">導入を申し込む</a>
+    <a class="btn ghost" href="https://x.com/ForTUNESTOCK_jp" target="_blank" rel="noopener">Xで最新情報を見る</a>
+    <p class="note">※お申し込み後、まずオンラインで30分お話しします。合わないと感じたら、そこでやめて大丈夫です。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="en">FORTUNE STOCK ── PRESENTED BY NANOCA INC.</div>
+  <p style="margin-top:8px">音楽が、その場かぎりで消えないための仕組み。　#ちゅんすと</p>
+  <p class="note" style="margin-top:6px">© nanoca inc. ／ 声を、科学で解釈し、遺す。</p>
+</footer>
+
+</div>
+
+<script>
+/* 文字盤の点 */
+(function(){
+  var f=document.getElementById('face');
+  for(var k=0;k<12;k++){
+    var a=Math.PI*2*k/12, d=document.createElement('div');
+    d.className='dot';
+    var r=50;
+    d.style.left=(50+Math.cos(a)*44)+'%';
+    d.style.top=(50+Math.sin(a)*44)+'%';
+    if(k%3===0){d.style.width='7px';d.style.height='7px';}
+    f.appendChild(d);
+  }
+})();
+</script>
+</body>
+</html>
